@@ -21,7 +21,7 @@ def make_dict_message(f_name:  str = 'message.json', f_path: str = 'r:\\') -> di
     full_path = os.path.normpath(f_path + '\\' + f_name)
     data = {}
     if os.path.exists(full_path):
-        with open(full_path, 'r', encoding='utf-8') as j_file:
+        with open(full_path, 'r', encoding='cp1251') as j_file:
             data = json.load(j_file)
     return data
 
@@ -42,6 +42,7 @@ def main():
     операций что требуют повышения прав у кассиров
     :return:
     """
+    os.chdir('d:\\kassa\\script_py\\telegram_send_code\\')
     token = conf_token('token', default=None)
     id = conf_token('id', default=None)
     bot = telebot.TeleBot(token)
