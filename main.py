@@ -29,7 +29,8 @@ def make_dict_message(f_name:  str = 'message.json', f_path: str = 'r:\\') -> di
 def make_message(i_dict: dict = {}) -> str:
 
     i_message = f'Магазин: {i_dict.get("shop", "TT")} \nСообщение: {i_dict.get("text", "заглушка")} \n' \
-                f'Номер чека: {i_dict.get("number", "нет номера")} \nСумма: {i_dict.get("summ", "нет суммы")}'
+                f'Номер чека: {i_dict.get("number", "нет номера")} \nСумма: {i_dict.get("summ", "нет суммы")} \n' \
+                f'Код проверки {i_dict.get("code", "")}'
     return i_message
 
 
