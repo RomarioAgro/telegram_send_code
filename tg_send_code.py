@@ -14,10 +14,10 @@ def send_m(message: str = 'Привет, мир', id: str = '', bot: Any = None)
     :param bot: object объект бота телеграм для отправки
     :return: None
     """
-    bot.send_message(id, f'<b>{message}</b>', parse_mode='html')
+    bot.send_message(id, '<b>{}</b>'.format(message), parse_mode='html')
 
 
-def make_dict_message(f_name:  str = 'message.json', f_path: str = 'r:\\') -> dict:
+def make_dict_message(f_name: str = 'message.json', f_path: str = 'r:\\') -> dict:
     full_path = os.path.normpath(f_path + '\\' + f_name)
     data = {}
     if os.path.exists(full_path):
@@ -27,10 +27,10 @@ def make_dict_message(f_name:  str = 'message.json', f_path: str = 'r:\\') -> di
 
 
 def make_message(i_dict: dict = {}) -> str:
-
-    i_message = f'Магазин: {i_dict.get("shop", "TT")} \nСообщение: {i_dict.get("text", "заглушка")} \n' \
-                f'Номер чека: {i_dict.get("number", "нет номера")} \nСумма: {i_dict.get("summ", "нет суммы")} \n' \
-                f'Код проверки {i_dict.get("code", "")}'
+    i_message = 'Магазин: {0} \nСообщение: {1} \nНомер чека: {2} \nСумма: {3} \nКод проверки {4}'.format(
+        i_dict.get("shop", "TT"), i_dict.get("text", "заглушка"),
+        i_dict.get("number", "нет номера"), i_dict.get("summ", "нет суммы"),
+        i_dict.get("code", ""))
     return i_message
 
 
@@ -49,6 +49,7 @@ def main():
     dict_message = make_dict_message(f_path=argv[1], f_name=argv[2])
     message = make_message(i_dict=dict_message)
     send_m(message=message, id=id, bot=bot)
+
 
 if __name__ == '__main__':
     main()
