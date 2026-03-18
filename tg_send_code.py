@@ -43,7 +43,7 @@ def main():
     операций что требуют повышения прав у кассиров
     :return:
     """
-    # os.chdir('d:\\kassa\\script_py\\telegram_send_code\\')
+    os.chdir('d:\\kassa\\script_py\\telegram_send_code\\')
     token = conf_token('token', default=None)
     id = conf_token('id', default=None)
     proxy_host=conf_token('proxy_host', default=None)
