@@ -1,5 +1,6 @@
 from typing import Any
 import telebot
+from telebot import apihelper
 from decouple import config as conf_token
 from sys import argv
 import os
@@ -42,9 +43,14 @@ def main():
     операций что требуют повышения прав у кассиров
     :return:
     """
-    os.chdir('d:\\kassa\\script_py\\telegram_send_code\\')
+    # os.chdir('d:\\kassa\\script_py\\telegram_send_code\\')
     token = conf_token('token', default=None)
     id = conf_token('id', default=None)
+    proxy_host=conf_token('proxy_host', default=None)
+    proxy_port = conf_token('proxy_port', default=None)
+    apihelper.proxy = {
+        'https': f'socks5h://{proxy_host}:{proxy_port}'
+    }
     bot = telebot.TeleBot(token)
     dict_message = make_dict_message(f_path=argv[1], f_name=argv[2])
     message = make_message(i_dict=dict_message)
