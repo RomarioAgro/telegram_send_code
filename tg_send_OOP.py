@@ -4,8 +4,12 @@ from decouple import config as conf_token
 from sys import argv
 import os
 import json
+from pathlib import Path
 
-os.chdir('d:\\kassa\\script_py\\telegram_send_code\\')
+from dotenv import load_dotenv
+BASE_DIR = Path(__file__).resolve().parent
+env_path = BASE_DIR / '.env'
+load_dotenv(dotenv_path=env_path)
 
 
 def make_message(i_dict: dict = {}):
@@ -19,8 +23,11 @@ def make_message(i_dict: dict = {}):
 class TgSender:
 
     def __init__(self, message: dict = {}):
-        self.token = conf_token('token', default=None)
-        self.id = conf_token('id', default=None)
+        # load_dotenv('d:\\kassa\\script_py\\telegram_send_code\\.env')
+        # self.token = conf_token('token', default=None)
+        self.token = os.getenv('token')
+        # self.id = conf_token('id', default=None)
+        self.id = os.getenv('id')
         self.bot = telebot.TeleBot(self.token)
         self.message = make_message(i_dict=message)
 
@@ -36,7 +43,6 @@ def main():
     операций что требуют повышения прав у кассиров
     :return:
     """
-    os.chdir('d:\\kassa\\script_py\\telegram_send_code\\')
     my_dict = {
         'shop': 'C85',
         'text': 'тестовый текст'
